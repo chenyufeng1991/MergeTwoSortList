@@ -75,12 +75,6 @@ void CreateList(Node **pHead)
     }
 }
 
-/**
- *   1 2
-
-     3 4
- 有bug；
- */
 void MergeList(Node *pFirstList, Node *pSecondList, Node **pMergedList)
 {
     *pMergedList = new Node;
@@ -110,12 +104,14 @@ void MergeList(Node *pFirstList, Node *pSecondList, Node **pMergedList)
     {
         pMergedMove->next = pFirstMove;
         pFirstMove = pFirstMove->next;
+        pMergedMove = pMergedMove->next;
     }
 
     while (pSecondMove != NULL)
     {
         pMergedMove->next = pSecondMove;
         pSecondMove = pSecondMove->next;
+        pMergedMove = pMergedMove->next;
     }
 }
 
@@ -129,14 +125,3 @@ void PrintList(Node *pHead)
     }
     cout << endl;
 }
-
-
-
-
-
-
-
-
-
-
-
