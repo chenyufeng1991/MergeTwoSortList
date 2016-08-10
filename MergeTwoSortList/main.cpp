@@ -19,6 +19,8 @@ using namespace std;
 // 2 4 6 8
 // 1 2 3 4 5 6 7 8 9
 
+
+
 typedef struct ListNode{
 
     int element;
@@ -41,6 +43,7 @@ int main(int argc, const char * argv[])
 
     Node *pMergedList;
     MergeList(pFirstHead, pSecondHead, &pMergedList);
+    PrintList(pMergedList);
 
     return 0;
 }
@@ -72,45 +75,48 @@ void CreateList(Node **pHead)
     }
 }
 
+/**
+ *   1 2
+
+     3 4
+ 有bug；
+ */
 void MergeList(Node *pFirstList, Node *pSecondList, Node **pMergedList)
 {
     *pMergedList = new Node;
-    memset(pMergedList, 0, sizeof(Node));
+    memset(*pMergedList, 0, sizeof(Node));
     (*pMergedList)->next = NULL;
 
     Node *pFirstMove = pFirstList->next;
     Node *pSecondMove = pSecondList->next;
     Node *pMergedMove = *pMergedList;
 
-    while (pFirstList != NULL && pSecondList != NULL)
+    while (pFirstMove != NULL && pSecondMove != NULL)
     {
-        if (pFirstList->element <= pSecondList->element)
+        if (pFirstMove->element <= pSecondMove->element)
         {
             pMergedMove->next = pFirstMove;
-            pFirstList = pFirstList->next;
+            pFirstMove = pFirstMove->next;
         }
         else
         {
             pMergedMove->next = pSecondMove;
-            pSecondList = pSecondList->next;
+            pSecondMove = pSecondMove->next;
         }
         pMergedMove = pMergedMove->next;
     }
 
-    while (pFirstList != NULL)
+    while (pFirstMove != NULL)
     {
-
+        pMergedMove->next = pFirstMove;
+        pFirstMove = pFirstMove->next;
     }
 
-    while (pSecondList != NULL)
+    while (pSecondMove != NULL)
     {
-
+        pMergedMove->next = pSecondMove;
+        pSecondMove = pSecondMove->next;
     }
-
-
-
-
-
 }
 
 void PrintList(Node *pHead)
